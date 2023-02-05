@@ -5,6 +5,11 @@ pipeline {
         }
     }
     stages {
+        stage('Install Docker') {
+            steps {
+                sh 'apt-get update && apt-get install -y docker.io'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t my_image -f ./Flask_App_With_Jenkins/Dockerfile .'
