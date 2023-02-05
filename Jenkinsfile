@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-credentials') {
-                        def registry = "your_ecr_registry_url"
+                        def registry = "420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app"
                         def command = "docker push ${registry}:${env.BUILD_NUMBER}"
                         sh command
                     }
