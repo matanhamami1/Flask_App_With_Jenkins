@@ -1,10 +1,26 @@
-/* Requires the Docker Pipeline plugin */
 pipeline {
-    agent { docker { image 'python:3.10.7-alpine' } }
+    agent {
+        docker {
+            image 'python:3.9-slim-buster'
+        }
+    }
     stages {
-        stage('build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'python --version'
+                script {
+                    def app = docker.build("my_image")
+                }
+            }
+        }
+        stage('Push Docker Image to ECR') {
+            steps {
+                script {
+                    withAWS(credentials: 'aws-credentials') {
+                        def registry = "your_ecr_registry_url"
+                        def command = "docker push ${registry}:${env.BUILD_NUMBER}"
+                        sh command
+                    }
+                }
             }
         }
     }
