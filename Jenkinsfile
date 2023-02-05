@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t my_image -f ./Flask_App_With_Jenkins/Dockerfile .'
+                sh 'docker build -t my_image ./Flask_App_With_Jenkins/Dockerfile .'
             }
         }
         stage('Push Docker Image to ECR') {
