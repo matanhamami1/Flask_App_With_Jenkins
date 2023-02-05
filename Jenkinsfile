@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Install Docker') {
             steps {
-//                 sh 'sudo apt-get update && sudo apt-get install -y docker.io'
+                echo "hello"
             }
         }
         stage('Build Docker Image') {
