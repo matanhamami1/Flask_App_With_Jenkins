@@ -21,7 +21,7 @@ pipeline {
         stage('Run Docker Image on Remote Server') {
             steps {
                 echo "hello"
-                sh 'sudo ssh -o StrictHostKeyChecking=no -i "devops.pem" ubuntu@54.165.124.68'
+                sh 'sudo ssh -o StrictHostKeyChecking=no ubuntu@54.165.124.68'
                 sh 'docker run -d -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
                 
             }
