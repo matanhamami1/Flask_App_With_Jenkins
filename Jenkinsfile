@@ -20,10 +20,12 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                echo "hello"
-                echo "420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER"
-                sh 'sudo docker run --rm -p 5000:5000 my_image'
-                
+                sh 'container_id=$(sudo lsof -t -i:5000)'
+                if [ -n "$container_id" ]
+                then
+                  sh "sudo docker stop $container_id"
+                fi
+                sh 'sudo docker run --rm -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
             }
         }
     }
