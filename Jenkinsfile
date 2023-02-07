@@ -21,7 +21,7 @@ pipeline {
         stage('Run Docker Image on Remote Server') {
             steps {
                 echo "hello"
-                sh 'docker run --rm -d -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
                 
             }
         }
