@@ -20,7 +20,8 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'ssh ubuntu@54.165.124.68 "docker run -d -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER"'
+                sh 'ssh ubuntu@54.165.124.68'
+                sh 'docker run -d -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
             }
         }
     }
