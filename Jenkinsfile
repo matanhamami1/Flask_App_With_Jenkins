@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'container_id=$(sudo docker ps -a -q --filter ancestor=my_image --format="{{.ID}}")'
                 sh 'if [ -n "$container_id" ]; then sudo docker stop $container_id; fi'
-                sh 'sudo docker run --rm -p 5000:5000 my_image'
+                sh 'sudo docker run --rm -p 5001:5000 my_image'
             }
         }
     }
