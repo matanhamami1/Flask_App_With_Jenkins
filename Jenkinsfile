@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'ssh user@remote_server "docker run -d -p 80:80 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER"'   
+                sh 'ssh -i "devops.pem" ubuntu@ec2-54-165-124-68.compute-1.amazonaws.com'   
                 
             }
         }
