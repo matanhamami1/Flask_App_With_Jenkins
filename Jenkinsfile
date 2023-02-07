@@ -21,7 +21,8 @@ pipeline {
         stage('Run Docker Image on Remote Server') {
             steps {
                 echo "hello"
-                sh 'sudo lsof -t -i:5000 | xargs sudo kill $(sudo lsof -t -i:5000)'
+                sh 'pid=$(sudo lsof -t -i:5000)'
+                sh 'if [ ! -z "$pid" ]; then sudo kill $pid; fi'
                 sh 'sudo docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
                 
             }
