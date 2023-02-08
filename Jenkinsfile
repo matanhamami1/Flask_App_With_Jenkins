@@ -20,17 +20,14 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'ssh -o StrictHostKeyChecking=no -T -i ~/devopshome.pem ubuntu@3.86.97.209'
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 420493635762.dkr.ecr.us-east-1.amazonaws.com'
-                sh 'docker stop $(docker ps -q --filter "publish=5000") || true'
-                sh 'docker rm $(docker ps -q --filter "publish=5000") || true'
-                sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
-                sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
-            }
-        }
-        stage('Stop Running Container') {
-            steps {
-                sh 'sleep 120s && docker stop $(docker ps -q --filter "publish=5000")'
+                timeout(time: 2, unit: 'MINUTES') {
+                    sh 'ssh -o StrictHostKeyChecking=no -T -i ~/devopshome.pem ubuntu@3.86.97.209'
+                    sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 420493635762.dkr.ecr.us-east-1.amazonaws.com'
+                    sh 'docker stop $(docker ps -q --filter "publish=5000") || true'
+                    sh 'docker rm $(docker ps -q --filter "publish=5000") || true'
+                    sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                    sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                }
             }
         }
     }
