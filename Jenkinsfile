@@ -20,7 +20,8 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'sudo docker run --rm -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                sh 'ssh -T -i ~/devops.pem ubuntu@44.203.70.130 "sudo docker run --rm -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER"'
+                
             }
         }
     }
