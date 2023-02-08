@@ -24,7 +24,7 @@ pipeline {
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 420493635762.dkr.ecr.us-east-1.amazonaws.com'
                 sh 'docker stop $(docker ps -a -q)'
                 sh 'docker rm $(docker ps -a -q)'
-                sh 'sudo docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
                 sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
                 
             }
