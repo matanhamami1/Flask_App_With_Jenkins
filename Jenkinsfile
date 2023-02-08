@@ -28,9 +28,9 @@ pipeline {
                     sh 'docker stop my_container || true'
                     sh 'docker rm my_container || true'
                     sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
-                    sh 'docker run --name my_container -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'                   
-                }
-                sh 'docker stop my_container'
+                    sh 'docker run --name my_container -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
+                    sh 'docker stop my_container'
+                }                
             }
         }
     }
