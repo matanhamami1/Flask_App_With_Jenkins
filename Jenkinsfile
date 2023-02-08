@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'ssh -T -i ~/devopshome.pem ubuntu@3.86.97.209'
+                sh 'ssh -T -i /var/lib/jenkins/devopshome.pem ubuntu@3.86.97.209'
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 420493635762.dkr.ecr.us-east-1.amazonaws.com'
                 sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:BUILD_NUMBER'
                 sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:BUILD_NUMBER'
