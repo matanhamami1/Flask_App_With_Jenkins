@@ -28,5 +28,10 @@ pipeline {
                 sh 'docker run -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
             }
         }
+        stage('Stop Running Container') {
+            steps {
+                sh 'sleep 120s && docker stop $(docker ps -q --filter "publish=5000")'
+            }
+        }
     }
 }
