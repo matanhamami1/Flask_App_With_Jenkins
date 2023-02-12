@@ -21,7 +21,7 @@ pipeline {
         stage('Run Docker Image on Remote Server') {
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
-                    sh 'ssh -o StrictHostKeyChecking=no -T -i ~/devopshome.pem ubuntu@3.88.116.96'
+                    sh 'ssh -o StrictHostKeyChecking=no -T -i ~/devopshome.pem ubuntu@54.84.188.10'
                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 420493635762.dkr.ecr.us-east-1.amazonaws.com'
                     sh 'docker stop $(docker ps -q --filter "publish=5000") || true'
                     sh 'docker rm $(docker ps -q --filter "publish=5000") || true'
