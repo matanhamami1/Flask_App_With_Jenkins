@@ -26,7 +26,7 @@ pipeline {
                     sh 'docker stop $(docker ps -q --filter "publish=5000") || true'
                     sh 'docker rm $(docker ps -q --filter "publish=5000") || true'
                     sh 'docker pull 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'
-                    sh 'docker run --detach --name my_container$BUILD_NUMBER -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'                
+                    sh 'docker run --name my_container$BUILD_NUMBER -p 5000:5000 420493635762.dkr.ecr.us-east-1.amazonaws.com/matan_app:$BUILD_NUMBER'                
                 }
                     sh 'docker stop my_container$BUILD_NUMBER || true'
                     sh 'docker rm my_container$BUILD_NUMBER || true'
